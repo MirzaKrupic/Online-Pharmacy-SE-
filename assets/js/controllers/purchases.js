@@ -21,6 +21,7 @@ class Purchases {
   static getAll() {
     $("#purchases-tables").DataTable({
       processing: true,
+      serverSide: true,
       bDestroy: true,
       responsive: true,
       pagingType: "simple",
