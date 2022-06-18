@@ -71,9 +71,10 @@ class Medicines {
           return resp;
         },
         data: function (d) {
+          if (d.search.value == 0) { d.search = " " }
+          else { d.search = d.search.value };
           d.offset = d.start;
           d.limit = d.length;
-          d.search = "naida";
           d.order = encodeURIComponent((d.order[0].dir == 'asc' ? "-" : "+") + d.columns[d.order[0].column].data);
 
           delete d.start;
