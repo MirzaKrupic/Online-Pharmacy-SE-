@@ -9,7 +9,7 @@ class MedicineDao extends BaseDao
     parent::__construct("medicines");
   }
 
-  public function get_medicines_by_name($offset, $limit, $search, $order, $total = FALSE)
+  public function get_medicines_by_name($offset, $limit, $search = ' ', $order, $total = FALSE)
   {
     list($order_column, $order_direction) = self::parse_order($order);
     $params = [];
