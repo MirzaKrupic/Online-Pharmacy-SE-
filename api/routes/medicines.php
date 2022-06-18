@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @OA\Post(path="/admin/medicines", tags={"admin" ,"medicines"}, security={{"ApiKeyAuth": {}}},
  *  @OA\RequestBody(description="Add medicine", required=true,
@@ -15,9 +16,9 @@
  *  @OA\Response(response="200", description="Add medicine")
  * )
  */
-Flight::route('POST /admin/medicines', function(){
-    $data=Flight::request()->data->getData();
-    Flight::json(Flight::medicineService()->add($data));
+Flight::route('POST /admin/medicines', function () {
+  $data = Flight::request()->data->getData();
+  Flight::json(Flight::medicineService()->add($data));
 });
 
 /**
@@ -29,14 +30,14 @@ Flight::route('POST /admin/medicines', function(){
  *     @OA\Response(response="200", description="List medicines for user")
  * )
  */
-Flight::route('GET /medicines', function(){
+Flight::route('GET /medicines', function () {
   $offset = Flight::query('offset', 0);
   $limit = Flight::query('limit', 25);
-  $search = Flight::query('search');
+  //$search = Flight::query('search');
   $order = Flight::query('order', '-id');
-  $total = Flight::medicineService()->get_medicines($offset, $limit, $search, $order, TRUE);
-  header('total-records: ' .$total['total']);
-  Flight::json(Flight::medicineService()->get_medicines($offset, $limit, $search, $order));
+  $total = Flight::medicineService()->get_medicines($offset, $limit, null, $order, TRUE);
+  header('total-records: ' . $total['total']);
+  Flight::json(Flight::medicineService()->get_medicines($offset, $limit, null, $order));
 });
 
 /**
@@ -45,7 +46,7 @@ Flight::route('GET /medicines', function(){
  *     @OA\Response(response="200", description="Fetch individual medicine")
  * )
  */
-Flight::route('GET /users/medicines/@id', function($id){
+Flight::route('GET /users/medicines/@id', function ($id) {
   Flight::json(Flight::medicineService()->get_by_id($id));
 });
 
@@ -66,7 +67,7 @@ Flight::route('GET /users/medicines/@id', function($id){
  *     @OA\Response(response="200", description="Update individual medicine")
  * )
  */
-Flight::route('PUT /admin/medicines/@id', function($id){
+Flight::route('PUT /admin/medicines/@id', function ($id) {
   $data = Flight::request()->data->getData();
   Flight::json(Flight::medicineService()->update(intval($id), $data));
 });
@@ -78,8 +79,8 @@ Flight::route('PUT /admin/medicines/@id', function($id){
  *     @OA\Response(response="200", description="Get medicinechart data")
  * )
  */
-Flight::route('GET /admin/medicines/chart', function(){
-  $res=Flight::medicineService()->getChart();
+Flight::route('GET /admin/medicines/chart', function () {
+  $res = Flight::medicineService()->getChart();
   Flight::json($res);
 });
 
@@ -89,7 +90,7 @@ Flight::route('GET /admin/medicines/chart', function(){
  *     @OA\Response(response="200", description="Get medicinechart data")
  * )
  */
-Flight::route('GET /admin/medicines/chart/company', function(){
-  $res=Flight::medicineService()->getChartCompany();
+Flight::route('GET /admin/medicines/chart/company', function () {
+  $res = Flight::medicineService()->getChartCompany();
   Flight::json($res);
 });
