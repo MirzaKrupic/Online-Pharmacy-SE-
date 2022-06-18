@@ -1,24 +1,27 @@
 <?php
-require_once dirname(__FILE__)."/../dao/MedicineDao.class.php";
-require_once dirname(__FILE__)."/BaseService.class.php";
+require_once dirname(__FILE__) . "/../dao/MedicineDao.class.php";
+require_once dirname(__FILE__) . "/BaseService.class.php";
 
-class MedicineService extends BaseService{
+class MedicineService extends BaseService
+{
 
-  public function __construct(){
+  public function __construct()
+  {
     $this->dao = new MedicineDao();
   }
 
-  public function get_medicines($offset, $limit, $search, $order, $total  = FALSE){
-    if($search){
-        return $this->dao->get_medicines_by_name($offset, $limit, $search, $order, $total);
-    }
-    else{
-      return $this->dao->get_all($offset, $limit,null, $order, $total);
+  public function get_medicines($offset, $limit, $search, $order, $total  = FALSE)
+  {
+    if (strlen($search) != 0) {
+      return $this->dao->get_medicines_by_name($offset, $limit, $search, $order, $total);
+    } else {
+      return $this->dao->get_all($offset, $limit, $order, $total);
     }
   }
 
-  public function add($medicine){
-    try{
+  public function add($medicine)
+  {
+    try {
       $data = [
         "name" => $medicine["name"],
         "company_name" => $medicine["company_name"],
@@ -27,19 +30,19 @@ class MedicineService extends BaseService{
         "added_at" => date(Config::DATE_FORMAT),
         "quantity" => $medicine["quantity"]
       ];
-    return parent::add($data);
-    }catch(\Exception $e){
-    throw new \Exception($e->getMessage(), 400, $e);
-
+      return parent::add($data);
+    } catch (\Exception $e) {
+      throw new \Exception($e->getMessage(), 400, $e);
     }
   }
 
-  public function getChart(){
+  public function getChart()
+  {
     return $this->dao->get_chart_all();
   }
 
-  public function getChartCompany(){
+  public function getChartCompany()
+  {
     return $this->dao->get_chart_company();
   }
-
 }
