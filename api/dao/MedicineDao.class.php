@@ -9,7 +9,7 @@ class MedicineDao extends BaseDao
     parent::__construct("medicines");
   }
 
-  public function get_medicines_by_name($offset, $limit, $search = 'm', $order, $total = FALSE)
+  public function get_medicines_by_name($offset, $limit, $search, $order, $total = FALSE)
   {
     list($order_column, $order_direction) = self::parse_order($order);
     $params = [];
@@ -21,9 +21,10 @@ class MedicineDao extends BaseDao
     $query .= "FROM medicines
               WHERE 1 = 1 ";
 
-    $query .= "AND ( LOWER(name) LIKE CONCAT('%', :search, '%') OR LOWER(description) LIKE CONCAT('%', :search, '%'))";
-    $params['search'] = strtolower($search);
-
+    if ($search != null) {
+      $query .= "AND ( LOWER(name) LIKE CONCAT('%', :search, '%') OR LOWER(description) LIKE CONCAT('%', :search, '%'))";
+      $params['search'] = strtolower('m');
+    }
 
     if ($total) {
       return $this->query_unique($query, $params);

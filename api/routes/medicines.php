@@ -93,4 +93,3 @@ Flight::route('GET /admin/medicines/chart/company', function(){
   $res=Flight::medicineService()->getChartCompany();
   Flight::json($res);
 });
-?>
