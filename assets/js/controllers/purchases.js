@@ -54,7 +54,7 @@ class Purchases {
         data: function (d) {
           d.offset = d.start;
           d.limit = d.length;
-          if (d.search.value == 0) { d.search = " " }
+          if (d.search.value == 0) { d.search = null }
           else { d.search = d.search.value };
           d.order = encodeURIComponent((d.order[0].dir == 'asc' ? "-" : "+") + d.columns[d.order[0].column].data);
 
