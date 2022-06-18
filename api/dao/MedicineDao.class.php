@@ -21,10 +21,10 @@ class MedicineDao extends BaseDao
     $query .= "FROM medicines
               WHERE 1 = 1 ";
 
-    if ($search != null) {
-      $query .= "AND ( LOWER(name) LIKE CONCAT('%', :search, '%') OR LOWER(description) LIKE CONCAT('%', :search, '%'))";
-      $params['search'] = strtolower('m');
-    }
+    // if ($search != null) {
+    //   $query .= "AND ( LOWER(name) LIKE CONCAT('%', :search, '%') OR LOWER(description) LIKE CONCAT('%', :search, '%'))";
+    //   $params['search'] = strtolower($search);
+    // }
 
     if ($total) {
       return $this->query_unique($query, $params);
