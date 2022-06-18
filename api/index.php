@@ -14,17 +14,17 @@ require_once dirname(__FILE__) . "/services/PurchaseService.class.php";
 Flight::set('flight.log.errors', TRUE);
 
 //error handling for our API
-Flight::map('error', function (Exception $ex) {
-  Flight::json(["message" => $ex->getMessage()], $ex->getCode() ? $ex->getCode() : 500);
-});
+// Flight::map('error', function(Exception $ex){
+//   Flight::json(["message" => $ex->getMessage()], $ex->getCode()? $ex->getCode(): 500);
+// });
 
 // utility function for reading query parameters from url
-// Flight::map('query', function($name, $defaul_value = NULL){
-//   $request = Flight::request();
-//   $query_param = @$request->query->getData()[$name];
-//   $query_param = $query_param ? $query_param : $defaul_value;
-//   return urldecode($query_param);
-// });
+Flight::map('query', function ($name, $defaul_value = NULL) {
+  $request = Flight::request();
+  $query_param = @$request->query->getData()[$name];
+  $query_param = $query_param ? $query_param : $defaul_value;
+  return urldecode($query_param);
+});
 
 /* utility function for getting header parameters */
 Flight::map('header', function ($name) {
