@@ -33,8 +33,7 @@ Flight::route('POST /admin/medicines', function () {
 Flight::route('GET /medicines', function () {
   $offset = Flight::query('offset', 0);
   $limit = Flight::query('limit', 25);
-  if (strlen(Flight::query('search')) == 0) $search = " ";
-  else $search = Flight::query('search');
+  $search = Flight::query('search');
   $order = Flight::query('order', '-id');
   $total = Flight::medicineService()->get_medicines($offset, $limit, $search, $order, TRUE);
   header('total-records: ' . $total['total']);
