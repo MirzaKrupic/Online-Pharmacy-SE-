@@ -23,9 +23,11 @@ class MedicineDao extends BaseDao
               WHERE 1 = 1 ";
 
     if ($search != null) {
-      $query .= "AND ( LOWER(name) LIKE CONCAT('%', :search, '%') OR LOWER(description) LIKE CONCAT('%', :search, '%'))";
-      $params['search'] = strtolower($search);
+      $search = "naida";
     }
+
+    $query .= "AND ( LOWER(name) LIKE CONCAT('%', :search, '%') OR LOWER(description) LIKE CONCAT('%', :search, '%'))";
+    $params['search'] = strtolower($search);
 
 
     if ($total) {
