@@ -20,6 +20,7 @@ class Purchases {
 
   static getAll() {
     $("#purchases-tables").DataTable({
+      searching: false,
       processing: true,
       serverSide: true,
       bDestroy: true,
