@@ -73,7 +73,6 @@ class Medicines {
         data: function (d) {
           d.offset = d.start;
           d.limit = d.length;
-          d.search = d.search.value;
           d.order = encodeURIComponent((d.order[0].dir == 'asc' ? "-" : "+") + d.columns[d.order[0].column].data);
 
           delete d.start;
