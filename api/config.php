@@ -39,7 +39,7 @@ class Config{
     return Config::get_env("SMTP_PASSWORD", NULL);
   }
 
-  const JWP_SECRET = "JWT SECRET";
+  const AJPLS = "JWT SECRET";
   const JWT_TIME = 604800;
 
   public static function get_env($name, $default){
