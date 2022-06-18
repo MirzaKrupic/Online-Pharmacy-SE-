@@ -12,16 +12,17 @@
 
   "platform": {
 
-    "php": "7.3"
+     "php": "^7.3|^8.1"
 
   }
 
 },
     "require": {
+         "php": "^7.3|^8.1",
         "mikecao/flight": "^1.3",
         "zircote/swagger-php": "^3.1",
         "swiftmailer/swiftmailer": "^6.2",
-        "firebase/php-jwt": "^5.2",
-        "php": "7.4.0"
+        "firebase/php-jwt": "^5.2"
+       
     }
 }
