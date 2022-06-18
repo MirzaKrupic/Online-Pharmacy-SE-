@@ -34,13 +34,8 @@ class PurchaseService extends BaseService{
   }
  }
 
- public function get_purchase($offset, $limit, $search, $order){
-   if($search){
-       return $this->dao->get_purchase_by_id($search);
-   }
-   else{
+ public function get_purchase($offset, $limit, $order){
      return $this->dao->get_all_purchase($offset, $limit, $order);
-   }
  }
 
  public function remove($id){
@@ -60,5 +55,3 @@ class PurchaseService extends BaseService{
  }
 
 }
-
-?>

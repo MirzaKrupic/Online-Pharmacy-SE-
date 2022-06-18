@@ -33,9 +33,8 @@ Flight::route('POST /users/purchases', function(){
 Flight::route('GET /admin/purchases', function(){
   $offset = Flight::query('offset', 0);
   $limit = Flight::query('limit', 25);
-  $search = Flight::query('search');
   $order = Flight::query('order', '-id');
-  Flight::json(Flight::purchaseService()->get_purchase($offset, $limit, $search, $order));
+  Flight::json(Flight::purchaseService()->get_purchase($offset, $limit, $order));
 });
 
 /**
@@ -78,4 +77,3 @@ Flight::route('GET /users/purchases/individual', function(){
 Flight::route('GET /admin/purchases/individual/@id', function($id){
   Flight::json(Flight::purchaseService()->getIndividualPurchase($id));
 });
-?>

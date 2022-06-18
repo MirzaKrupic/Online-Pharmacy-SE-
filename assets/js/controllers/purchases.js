@@ -21,7 +21,6 @@ class Purchases {
   static getAll() {
     $("#purchases-tables").DataTable({
       processing: true,
-      serverSide: true,
       bDestroy: true,
       responsive: true,
       pagingType: "simple",
@@ -54,7 +53,6 @@ class Purchases {
         data: function (d) {
           d.offset = d.start;
           d.limit = d.length;
-          d.search = d.search.value;
           d.order = encodeURIComponent((d.order[0].dir == 'asc' ? "-" : "+") + d.columns[d.order[0].column].data);
 
           delete d.start;
