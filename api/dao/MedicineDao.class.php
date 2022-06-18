@@ -13,6 +13,7 @@ class MedicineDao extends BaseDao
   {
     list($order_column, $order_direction) = self::parse_order($order);
     $params = [];
+    echo ($search);
     if ($total) {
       $query = "SELECT COUNT(*) AS total ";
     } else {
@@ -25,6 +26,7 @@ class MedicineDao extends BaseDao
       $query .= "AND ( LOWER(name) LIKE CONCAT('%', :search, '%') OR LOWER(description) LIKE CONCAT('%', :search, '%'))";
       $params['search'] = strtolower($search);
     }
+
 
     if ($total) {
       return $this->query_unique($query, $params);
