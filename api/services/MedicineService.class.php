@@ -13,7 +13,7 @@ class MedicineService extends BaseService{
         return $this->dao->get_medicines_by_name($offset, $limit, $search, $order, $total);
     }
     else{
-      return $this->dao->get_all($offset, $limit, $order, $total);
+      return $this->dao->get_all($offset, $limit,null, $order, $total);
     }
   }
 
@@ -43,5 +43,3 @@ class MedicineService extends BaseService{
   }
 
 }
-
-?>
