@@ -17,8 +17,8 @@
  * )
  */
 Flight::route('POST /admin/medicines', function () {
-  $data = Flight::request()->data->getData();
-  Flight::json(Flight::medicineService()->add($data));
+    $data = Flight::request()->data->getData();
+    Flight::json(Flight::medicineService()->add($data));
 });
 
 /**
@@ -31,13 +31,13 @@ Flight::route('POST /admin/medicines', function () {
  * )
  */
 Flight::route('GET /medicines', function () {
-  $offset = Flight::query('offset', 0);
-  $limit = Flight::query('limit', 25);
-  $search = Flight::query('search');
-  $order = Flight::query('order', '-id');
-  $total = Flight::medicineService()->get_medicines($offset, $limit, $search, $order, TRUE);
-  header('total-records: ' . $total['total']);
-  Flight::json(Flight::medicineService()->get_medicines($offset, $limit, $search, $order));
+    $offset = Flight::query('offset', 0);
+    $limit = Flight::query('limit', 25);
+    $search = Flight::query('search');
+    $order = Flight::query('order', '-id');
+    $total = Flight::medicineService()->get_medicines($offset, $limit, $search, $order, true);
+    header('total-records: ' . $total['total']);
+    Flight::json(Flight::medicineService()->get_medicines($offset, $limit, $search, $order));
 });
 
 /**
@@ -47,7 +47,7 @@ Flight::route('GET /medicines', function () {
  * )
  */
 Flight::route('GET /users/medicines/@id', function ($id) {
-  Flight::json(Flight::medicineService()->get_by_id($id));
+    Flight::json(Flight::medicineService()->get_by_id($id));
 });
 
 /**
@@ -68,8 +68,8 @@ Flight::route('GET /users/medicines/@id', function ($id) {
  * )
  */
 Flight::route('PUT /admin/medicines/@id', function ($id) {
-  $data = Flight::request()->data->getData();
-  Flight::json(Flight::medicineService()->update(intval($id), $data));
+    $data = Flight::request()->data->getData();
+    Flight::json(Flight::medicineService()->update(intval($id), $data));
 });
 
 
@@ -80,8 +80,8 @@ Flight::route('PUT /admin/medicines/@id', function ($id) {
  * )
  */
 Flight::route('GET /admin/medicines/chart', function () {
-  $res = Flight::medicineService()->getChart();
-  Flight::json($res);
+    $res = Flight::medicineService()->getChart();
+    Flight::json($res);
 });
 
 /**
@@ -91,6 +91,6 @@ Flight::route('GET /admin/medicines/chart', function () {
  * )
  */
 Flight::route('GET /admin/medicines/chart/company', function () {
-  $res = Flight::medicineService()->getChartCompany();
-  Flight::json($res);
+    $res = Flight::medicineService()->getChartCompany();
+    Flight::json($res);
 });

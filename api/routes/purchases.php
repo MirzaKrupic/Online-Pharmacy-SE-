@@ -14,7 +14,7 @@
  *  @OA\Response(response="200", description="Purchase medicine")
  * )
  */
-Flight::route('POST /users/purchases', function(){
+Flight::route('POST /users/purchases', function () {
     $data=Flight::request()->data->getData();
     $data["account_id"] = Flight::get('user')['id'];
     Flight::purchaseService()->add($data);
@@ -30,11 +30,11 @@ Flight::route('POST /users/purchases', function(){
  *     @OA\Response(response="200", description="List purchases")
  * )
  */
-Flight::route('GET /admin/purchases', function(){
-  $offset = Flight::query('offset', 0);
-  $limit = Flight::query('limit', 25);
-  $order = Flight::query('order', '-id');
-  Flight::json(Flight::purchaseService()->get_purchase($offset, $limit, $order));
+Flight::route('GET /admin/purchases', function () {
+    $offset = Flight::query('offset', 0);
+    $limit = Flight::query('limit', 25);
+    $order = Flight::query('order', '-id');
+    Flight::json(Flight::purchaseService()->get_purchase($offset, $limit, $order));
 });
 
 /**
@@ -44,9 +44,9 @@ Flight::route('GET /admin/purchases', function(){
  *     @OA\Response(response="200", description="Remove individual purchase")
  * )
  */
-Flight::route('PUT /admin/purchases/@id', function($id){
-  Flight::purchaseService()->remove($id);
-  Flight::json(["message" => "Purchase deleted"]);
+Flight::route('PUT /admin/purchases/@id', function ($id) {
+    Flight::purchaseService()->remove($id);
+    Flight::json(["message" => "Purchase deleted"]);
 });
 
 /**
@@ -54,9 +54,9 @@ Flight::route('PUT /admin/purchases/@id', function($id){
  *     @OA\Response(response="200", description="Get purchase chart data")
  * )
  */
-Flight::route('GET /admin/purchases/chart', function(){
-  $res=Flight::purchaseService()->getChart();
-  Flight::json($res);
+Flight::route('GET /admin/purchases/chart', function () {
+    $res=Flight::purchaseService()->getChart();
+    Flight::json($res);
 });
 
 /**
@@ -64,7 +64,7 @@ Flight::route('GET /admin/purchases/chart', function(){
  *  @OA\Response(response="200", description="Purchase medicine")
  * )
  */
-Flight::route('GET /users/purchases/individual', function(){
+Flight::route('GET /users/purchases/individual', function () {
     Flight::json(Flight::purchaseService()->getPurchase(Flight::get('user')['id']));
 });
 
@@ -74,6 +74,6 @@ Flight::route('GET /users/purchases/individual', function(){
  *     @OA\Response(response="200", description="Fetch individual medicine")
  * )
  */
-Flight::route('GET /admin/purchases/individual/@id', function($id){
-  Flight::json(Flight::purchaseService()->getIndividualPurchase($id));
+Flight::route('GET /admin/purchases/individual/@id', function ($id) {
+    Flight::json(Flight::purchaseService()->getIndividualPurchase($id));
 });

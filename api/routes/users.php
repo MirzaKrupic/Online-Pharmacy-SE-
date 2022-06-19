@@ -15,7 +15,7 @@
  *  @OA\Response(response="200", description="Add individual account")
  * )
  */
-Flight::route('POST /register', function(){
+Flight::route('POST /register', function () {
     $data=Flight::request()->data->getData();
     Flight::userService()->register($data);
     Flight::json(["message" => "Successful registration! Please check your email!"]);
@@ -27,8 +27,8 @@ Flight::route('POST /register', function(){
  *     @OA\Response(response="200", description="Fetch individual user")
  * )
  */
-Flight::route('GET /users/@id', function($id){
-   Flight::json(Flight::userService()->get_by_id($id));
+Flight::route('GET /users/@id', function ($id) {
+    Flight::json(Flight::userService()->get_by_id($id));
 });
 
 /**
@@ -37,8 +37,6 @@ Flight::route('GET /users/@id', function($id){
  *     @OA\Response(response="200", description="Fetch individual user")
  * )
  */
- Flight::route('GET /users/name/@name', function($name){
-    Flight::json(Flight::userService()->get_user_by_name($name));
+ Flight::route('GET /users/name/@name', function ($name) {
+     Flight::json(Flight::userService()->get_user_by_name($name));
  });
-
-?>
