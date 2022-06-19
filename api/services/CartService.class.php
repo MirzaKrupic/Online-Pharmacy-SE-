@@ -1,7 +1,7 @@
 <?php
 
-require_once dirname(__FILE__)."/../dao/CartDao.class.php";
-
+require_once dirname(__FILE__) . "/../dao/CartDao.class.php";
+require_once dirname(__FILE__) . "/BaseService.class.php";
 class CartService extends BaseService
 {
     public function __construct()
@@ -18,11 +18,11 @@ class CartService extends BaseService
     {
         try {
             $data = [
-       "quantity" => $medicine["quantity"],
-       "STATUS" => "IN_CART",
-       "medicine_id" => $medicine["medicine_id"],
-       "account_id" => $medicine["account_id"]
-         ];
+                "quantity" => $medicine["quantity"],
+                "STATUS" => "IN_CART",
+                "medicine_id" => $medicine["medicine_id"],
+                "account_id" => $medicine["account_id"]
+            ];
             return parent::add($data);
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage(), 400, $e);

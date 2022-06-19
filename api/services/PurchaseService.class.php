@@ -1,9 +1,10 @@
 <?php
 
-require_once dirname(__FILE__)."/../dao/PurchaseDao.class.php";
-require_once dirname(__FILE__)."/../dao/AccountDao.class.php";
-require_once dirname(__FILE__)."/../clients/SMTPClient.class.php";
-require_once dirname(__FILE__)."/../utilities.php";
+require_once dirname(__FILE__) . "/../dao/PurchaseDao.class.php";
+require_once dirname(__FILE__) . "/../dao/AccountDao.class.php";
+require_once dirname(__FILE__) . "/BaseService.class.php";
+require_once dirname(__FILE__) . "/../clients/SMTPClient.class.php";
+require_once dirname(__FILE__) . "/../utilities.php";
 
 class PurchaseService extends BaseService
 {
@@ -20,12 +21,12 @@ class PurchaseService extends BaseService
 
         try {
             $data = [
-      "city" => $purchase["city"],
-      "zip" => $purchase["zip"],
-      "phone_number" => $purchase["phone_number"],
-      "date" => date(Config::DATE_FORMAT),
-      "account_id" => $purchase["account_id"]
-        ];
+                "city" => $purchase["city"],
+                "zip" => $purchase["zip"],
+                "phone_number" => $purchase["phone_number"],
+                "date" => date(Config::DATE_FORMAT),
+                "account_id" => $purchase["account_id"]
+            ];
 
             $price = $this->dao->get_total_price_by_account($account['id']);
             $carts = $this->dao->get_carts($purchase);
