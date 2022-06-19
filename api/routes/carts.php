@@ -4,8 +4,8 @@
  *     @OA\Response(response="200", description="List medicines for user")
  * )
  */
-Flight::route('GET /users/individual/cart', function(){
-   Flight::json(Flight::cartService()->get_accounts_medicines(Flight::get('user')['id']));
+Flight::route('GET /users/individual/cart', function () {
+    Flight::json(Flight::cartService()->get_accounts_medicines(Flight::get('user')['id']));
 });
 
 /**
@@ -21,7 +21,7 @@ Flight::route('GET /users/individual/cart', function(){
  *  @OA\Response(response="200", description="Add medicine")
  * )
  */
-Flight::route('POST /users/cart/@id', function($id){
+Flight::route('POST /users/cart/@id', function ($id) {
     $data=Flight::request()->data->getData();
     $data["account_id"] = Flight::get('user')['id'];
     $data["medicine_id"] = $id;
@@ -37,9 +37,9 @@ Flight::route('POST /users/cart/@id', function($id){
  *     @OA\Response(response="200", description="Remove medicine from cart")
  * )
  */
-Flight::route('PUT /users/cart/@id', function($id){
-  Flight::cartService()->remove_medicine(Flight::get('user')['id'], $id);
-  Flight::json(["message" => "Medicine removed from cart!"]);
+Flight::route('PUT /users/cart/@id', function ($id) {
+    Flight::cartService()->remove_medicine(Flight::get('user')['id'], $id);
+    Flight::json(["message" => "Medicine removed from cart!"]);
 });
 
 /**
@@ -47,7 +47,7 @@ Flight::route('PUT /users/cart/@id', function($id){
  *     @OA\Response(response="200", description="List total for user")
  * )
  */
-Flight::route('GET /users/total/cart', function(){
+Flight::route('GET /users/total/cart', function () {
     Flight::json(Flight::cartService()->get_total(Flight::get('user')['id']));
 });
 
@@ -56,7 +56,7 @@ Flight::route('GET /users/total/cart', function(){
  *     @OA\Response(response="200", description="List total for user")
  * )
  */
-Flight::route('GET /admin/cart', function(){
+Flight::route('GET /admin/cart', function () {
     Flight::json(Flight::cartService()->get_carts());
 });
 
@@ -67,9 +67,9 @@ Flight::route('GET /admin/cart', function(){
  *      @OA\Response(response="200", description="Change status in cart")
  * )
  */
-Flight::route('PUT /users/buy/cart', function(){
-  Flight::cartService()->buy_medicine(Flight::get('user')['id']);
-  Flight::json(["message" => "Medicines bought from cart!"]);
+Flight::route('PUT /users/buy/cart', function () {
+    Flight::cartService()->buy_medicine(Flight::get('user')['id']);
+    Flight::json(["message" => "Medicines bought from cart!"]);
 });
 
 /**
@@ -80,7 +80,7 @@ Flight::route('PUT /users/buy/cart', function(){
  *     @OA\Response(response="200", description="List total for user")
  * )
  */
-Flight::route('GET /users/cart/@id', function($id){
+Flight::route('GET /users/cart/@id', function ($id) {
     Flight::json(Flight::cartService()->get_cart($id));
 });
 
@@ -98,9 +98,7 @@ Flight::route('GET /users/cart/@id', function($id){
  *     @OA\Response(response="200", description="Update cart")
  * )
  */
-Flight::route('PUT /users/cart/update/@id', function($id){
-  $data = Flight::request()->data->getData();
-  Flight::json(Flight::cartService()->update($id, $data));
+Flight::route('PUT /users/cart/update/@id', function ($id) {
+    $data = Flight::request()->data->getData();
+    Flight::json(Flight::cartService()->update($id, $data));
 });
-
-?>

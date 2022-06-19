@@ -1,5 +1,7 @@
 <?php
-use \Firebase\JWT\JWT;
+
+use Firebase\JWT\JWT;
+
 require_once dirname(__FILE__)."/middleware.php";
 require_once dirname(__FILE__)."/../config.php";
 
@@ -22,12 +24,12 @@ require_once dirname(__FILE__)."/../config.php";
  *     @OA\Response(response="200", description="List all accounts")
  * )
  */
-Flight::route('GET /admin/accounts', function(){
-  $offset = Flight::query('offset', 0);
-  $limit = Flight::query('limit', 10);
-  $search = Flight::query('search');
-  $order = Flight::query('order', "+id");
-  Flight::json(Flight::accountService()->get_accounts($search, $offset, $limit, $order));
+Flight::route('GET /admin/accounts', function () {
+    $offset = Flight::query('offset', 0);
+    $limit = Flight::query('limit', 10);
+    $search = Flight::query('search');
+    $order = Flight::query('order', "+id");
+    Flight::json(Flight::accountService()->get_accounts($search, $offset, $limit, $order));
 });
 
 /**
@@ -36,8 +38,8 @@ Flight::route('GET /admin/accounts', function(){
  *     @OA\Response(response="200", description="Fetch individual account")
  * )
  */
-Flight::route('GET /admin/accounts/@id', function($id){
-  Flight::json(Flight::accountService()->get_by_id($id));
+Flight::route('GET /admin/accounts/@id', function ($id) {
+    Flight::json(Flight::accountService()->get_by_id($id));
 });
 
 /**
@@ -54,7 +56,7 @@ Flight::route('GET /admin/accounts/@id', function($id){
  *  @OA\Response(response="200", description="Add individual account")
  * )
  */
-Flight::route('POST /admin/accounts', function(){
+Flight::route('POST /admin/accounts', function () {
     $data=Flight::request()->data->getData();            // where is the data stored before the class metod
     Flight::json(Flight::accountService()->add($data));
 });
@@ -74,9 +76,9 @@ Flight::route('POST /admin/accounts', function(){
  *     @OA\Response(response="200", description="Update individual account")
  * )
  */
-Flight::route('PUT /admin/accounts/@id', function($id){
-  $data = Flight::request()->data->getData();
-  Flight::json(Flight::accountService()->update($id, $data));
+Flight::route('PUT /admin/accounts/@id', function ($id) {
+    $data = Flight::request()->data->getData();
+    Flight::json(Flight::accountService()->update($id, $data));
 });
 
 /**
@@ -92,7 +94,7 @@ Flight::route('PUT /admin/accounts/@id', function($id){
  *  @OA\Response(response="200", description="Login user")
  * )
  */
-Flight::route('POST /login', function(){
+Flight::route('POST /login', function () {
     Flight::json(Flight::JWT(Flight::accountService()->login(Flight::request()->data->getData())));
 });
 
@@ -108,7 +110,7 @@ Flight::route('POST /login', function(){
  *  @OA\Response(response="200", description="Recovery token")
  * )
  */
-Flight::route('POST /forgot', function(){
+Flight::route('POST /forgot', function () {
     $data = Flight::request()->data->getData();
     Flight::accountService()->forgot($data);
     Flight::json(["message" => "Recovery link has been send!"]);
@@ -127,7 +129,7 @@ Flight::route('POST /forgot', function(){
  *  @OA\Response(response="200", description="Reset password")
  * )
  */
-Flight::route('POST /reset', function(){
+Flight::route('POST /reset', function () {
     Flight::json(Flight::JWT(Flight::accountService()->reset(Flight::request()->data->getData())));
 });
 
@@ -137,7 +139,7 @@ Flight::route('POST /reset', function(){
  *     @OA\Response(response="200", description="Send conformation token")
  * )
  */
-Flight::route('GET /confirm/@token', function($token){
+Flight::route('GET /confirm/@token', function ($token) {
     Flight::json(Flight::JWT(Flight::accountService()->confirm($token)));
 });
 
@@ -146,7 +148,6 @@ Flight::route('GET /confirm/@token', function($token){
  *     @OA\Response(response="200", description="Fetch user account")
  * )
  */
-Flight::route('GET /users/account', function(){
-  Flight::json(Flight::accountService()->get_by_id(Flight::get('user')['id']));
+Flight::route('GET /users/account', function () {
+    Flight::json(Flight::accountService()->get_by_id(Flight::get('user')['id']));
 });
-?>

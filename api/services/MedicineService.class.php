@@ -1,28 +1,28 @@
 <?php
+
 require_once dirname(__FILE__) . "/../dao/MedicineDao.class.php";
 require_once dirname(__FILE__) . "/BaseService.class.php";
 
 class MedicineService extends BaseService
 {
-
-  public function __construct()
-  {
-    $this->dao = new MedicineDao();
-  }
-
-  public function get_medicines($offset, $limit, $search, $order, $total  = FALSE)
-  {
-    if (strlen($search) != 0) {
-      return $this->dao->get_medicines_by_name($offset, $limit, $search, $order, $total);
-    } else {
-      return $this->dao->get_all($offset, $limit, $order, $total);
+    public function __construct()
+    {
+        $this->dao = new MedicineDao();
     }
-  }
 
-  public function add($medicine)
-  {
-    try {
-      $data = [
+    public function get_medicines($offset, $limit, $search, $order, $total  = false)
+    {
+        if (strlen($search) != 0) {
+            return $this->dao->get_medicines_by_name($offset, $limit, $search, $order, $total);
+        } else {
+            return $this->dao->get_all($offset, $limit, $order, $total);
+        }
+    }
+
+    public function add($medicine)
+    {
+        try {
+            $data = [
         "name" => $medicine["name"],
         "company_name" => $medicine["company_name"],
         "price" => $medicine["price"],
@@ -30,19 +30,19 @@ class MedicineService extends BaseService
         "added_at" => date(Config::DATE_FORMAT),
         "quantity" => $medicine["quantity"]
       ];
-      return parent::add($data);
-    } catch (\Exception $e) {
-      throw new \Exception($e->getMessage(), 400, $e);
+            return parent::add($data);
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage(), 400, $e);
+        }
     }
-  }
 
-  public function getChart()
-  {
-    return $this->dao->get_chart_all();
-  }
+    public function getChart()
+    {
+        return $this->dao->get_chart_all();
+    }
 
-  public function getChartCompany()
-  {
-    return $this->dao->get_chart_company();
-  }
+    public function getChartCompany()
+    {
+        return $this->dao->get_chart_company();
+    }
 }
